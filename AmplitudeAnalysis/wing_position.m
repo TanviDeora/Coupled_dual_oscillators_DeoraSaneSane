@@ -1,9 +1,15 @@
 function [theta_atan, t_max, t_min]=wing_position(wing_vector)
 
 % calculate the wing position(in angles wrt to x axis) on the body plane
-unitx = [1,0,0];
+
+if nanmean(wing_vector(:,1)) < 0
+    unitx = [-1, 0, 0];
+else
+    unitx = [1, 0, 0];
+end
+
 l=length(wing_vector);
-theta_atan=zeros(1,l);
+theta_atan=zeros(1,l)*nan;
 for i=1:l
     projection_vector = [wing_vector(i,1), wing_vector(i,2),0];
     y=cross(unitx,projection_vector);

@@ -1,4 +1,4 @@
-function [rotated_r, angle]=strokeplane(r)
+function [rotated_r, angle]=strokeplane_averageEachStroke(r)
 %tranformation to the mean stroke plane to calcuate the wing ampltiude
 %written by Tanvi Deora on 7 June, 2013
 %edited by Tanvi on 9 Sept, 2020
@@ -9,21 +9,27 @@ function [rotated_r, angle]=strokeplane(r)
 %Find the (sort of) stroke plane that can be used as the refernce plane for calculating amplitudes
 %find 2 vectors, v1 and v2 which will lie in this reference plane 
 
-[~, elev, ~]= cart2sph(r(:,1), r(:,2), r(:,3));
+[t_max, t_min] = wing_position_ForStrokePlane(r);
 
-[~,max_variable] = max(elev);
-[~, min_variable] = min(elev);
+%[~, elev, ~]= cart2sph(r(:,1), r(:,2), r(:,3));
 
-v1=[r(max_variable,1),r(max_variable,2),r(max_variable,3)];
-v2=[r(min_variable,1),r(min_variable,2),r(min_variable,3)];
+%[~,max_variable] = max(elev);
+%[~, min_variable] = min(elev);
+
+v1=[r(t_max,1),r(t_max,2),r(t_max,3)];
+v2=[r(t_min,1),r(t_min,2),r(t_min,3)];
 
 %find the normal to this plane
-n=cross(v2,v1);
+n_all=cross(v2,v1);
 
 %find the angle that this vector, n makes with unitz (the normal to the
 %body plane) given by the cos inverse of the dot product of n and unitz
-
-angle=acos(n(3)/sqrt(sum(n.^2)));
+angle_all = zeros(1,length(n_all))*nan;
+for aa=1:size(n_all)
+    n = n_all(aa,:);
+    angle_all(aa)=acos(n(3)/sqrt(sum(n.^2)));
+end
+angle= mean(angle_all);
 
 % coordinates are transformed (rotated) from the body plane to this plane
 % through this angle
