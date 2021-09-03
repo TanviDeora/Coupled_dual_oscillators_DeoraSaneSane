@@ -2,11 +2,15 @@ function [theta_atan, t_max, t_min]=wing_position(wing_vector)
 
 % calculate the wing position(in angles wrt to x axis) on the body plane
 
-if nanmean(wing_vector(:,1)) < 0
-    unitx = [-1, 0, 0];
-else
-    unitx = [1, 0, 0];
-end
+% commented line 7-11 because all wings and halteres are in the positive x
+% directtion.
+% if nanmean(wing_vector(:,1)) < 0
+%     unitx = [-1, 0, 0];
+% else
+%     unitx = [1, 0, 0];
+% end
+
+unitx = [1, 0, 0];
 
 l=length(wing_vector);
 theta_atan=zeros(1,l)*nan;

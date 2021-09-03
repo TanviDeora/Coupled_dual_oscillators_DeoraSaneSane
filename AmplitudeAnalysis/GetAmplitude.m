@@ -9,7 +9,8 @@ treatment = 'Slit_sc';
 path_for_data_org_file = fullfile('../dataFolder/AmplitudeAnalysis/v1', treatment, 'TransformedData/');
 list = dir(fullfile(path_for_data_org_file,'*.mat'));
 
-outpath = fullfile('../dataFolder/AmplitudeAnalysis/v1', treatment, 'Kinematics/');
+%edited the line 2021/07 to change folder
+outpath = fullfile('../dataFolder/AmplitudeAnalysis/v2', treatment, 'Kinematics/');
 
 for f = 1:length(list)
     clear 'fields' 'new_bodyparts' 'strokePlane' 'rotated' 'theta' 'azimuth' 'wba'
@@ -31,7 +32,7 @@ for f = 1:length(list)
     % use suppination and pronation vectors to define stroke plane
     for i=1:length(fields)
         disp(fields(i))
-        [rotated.(fields{i}), strokePlane.(fields{i})] = strokeplane_averageEachStroke(new_bodyparts.(fields{i}));
+        [rotated.(fields{i}), strokePlane.(fields{i})] = strokeplane_averageEachStroke_FlipAxis(new_bodyparts.(fields{i}));
     end
 
     % get the wing projection on stroke plane and amplitude 

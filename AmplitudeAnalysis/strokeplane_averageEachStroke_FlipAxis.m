@@ -1,4 +1,4 @@
-function [rotated_r, angle, angle_all, v1, v2]=strokeplane_averageEachStroke(r)
+function [rotated_r, angle, angle_all, v1, v2]=strokeplane_averageEachStroke_FlipAxis(r)
 %tranformation to the mean stroke plane to calcuate the wing ampltiude
 %written by Tanvi Deora on 7 June, 2013
 %edited by Tanvi on 9 Sept, 2020
@@ -9,6 +9,9 @@ function [rotated_r, angle, angle_all, v1, v2]=strokeplane_averageEachStroke(r)
 %Find the (sort of) stroke plane that can be used as the refernce plane for calculating amplitudes
 %find 2 vectors, v1 and v2 which will lie in this reference plane 
 
+if mean(r(:,1)) < 0
+   r(:,1) = -r(:,1);
+end
 [t_max, t_min] = wing_position_ForStrokePlane(r);
 
 %[~, elev, ~]= cart2sph(r(:,1), r(:,2), r(:,3));
