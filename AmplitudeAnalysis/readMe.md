@@ -1,4 +1,4 @@
 These codes are divided into three separte parts - the first two are written in Matlab and the third in python:
 1) Tranforming data to fly centric coordinates:  users need to edit the variable "treatment" in the code "TransformFlyCoordinate_loopThroughAll.m" and run it to analyze all files in that treatment folder. This code will need two other files called "importfile.m" and "Transform_FlyCoordinates.m".
 2) Computing amplitude of wings and halteres: users need to edit the variable "treatment" in the code and run "GetAmplitude.m" to compute the wing (and haltere) ampltitude for all files in that treatment folder. This code will need the following files: "TrimEdgesOfNaN.m", "strokeplane_averageEachStroke_FlipAxis.m", "wing_position_ForStrokePlane.m", "wing_position.m" and "amplitude.m"
-3) Finally the python codes compile and plot figures for the all these ampltiude data generated in the earlier step. These are numbered in the order they must be executed.
+3) Finally the python codes compile and plot figures for the all the data generated in the earlier step. These are numbered in the order they must be executed.
